@@ -1,44 +1,45 @@
 //O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
 
 let listaAmigos = [];
+const lista = document.querySelector('.name-list');
+const input = document.querySelector('input');
 
 function adicionarAmigo() {
-    let amigoSecreto = document.querySelector('input').value;
-    if (amigoSecreto == ''){
-        alert('Por favor, insira um nome.');
-    } else if (verificaLista(amigoSecreto) == true) {
+    const amigoSecreto = input.value;
+
+    if (verificaLista(amigoSecreto) == true) {
         return;
     } else {
         atualizaLista();
+        input.value = '';
     }
-    limparCampo();
 }
 
 function atualizaLista() {
-    let lista = document.querySelector('.name-list');
     lista.innerHTML = '';
+
     for (let i = 0; i < listaAmigos.length; i++) {
         lista.innerHTML += `<li>${listaAmigos[i]}</li>`;
     }
 }
 
-function limparCampo() {
-    amigoSecreto = document.querySelector('input').value = '';
-}
-
 function verificaLista(amigoSecreto) {
-    let lista = document.querySelector('.name-list');
-    if (lista.innerHTML.includes(amigoSecreto)){
+    if (amigoSecreto == '') {
+        alert('Por favor, insira um nome.');
+        return true;
+    } else if (listaAmigos.includes(amigoSecreto)){
         alert('O nome já está na lista!');
-        return;
+        return true;
     } else {
         listaAmigos.push(amigoSecreto);
     }
 }
 
-function sortearAmigo(listaAmigos, lista) {
-    let resultadoSorteio = document.querySelector('.result-list');
-    let amigoSorteado = Math.floor(Math.random() * listaAmigos.length);
+const resultadoSorteio = document.querySelector('.result-list');
+
+function sortearAmigo() {
+    const numeroSorteado = Math.floor(Math.random() * listaAmigos.length);
+
     lista.innerHTML = '';
-    resultadoSorteio.innerHTML = `${amigoSorteado}`;
+    resultadoSorteio.innerHTML = `<li>Amigo Sorteado: ${listaAmigos[numeroSorteado]}</li>`;
 }
